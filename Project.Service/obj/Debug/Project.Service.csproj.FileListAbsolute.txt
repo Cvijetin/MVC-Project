@@ -1,0 +1,16 @@
+C:\Users\vidak\source\repos\Project\Project.Service\bin\Debug\Project.Service.dll.config
+C:\Users\vidak\source\repos\Project\Project.Service\bin\Debug\Project.Service.dll
+C:\Users\vidak\source\repos\Project\Project.Service\bin\Debug\Project.Service.pdb
+C:\Users\vidak\source\repos\Project\Project.Service\bin\Debug\EntityFramework.dll
+C:\Users\vidak\source\repos\Project\Project.Service\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\vidak\source\repos\Project\Project.Service\bin\Debug\PagedList.dll
+C:\Users\vidak\source\repos\Project\Project.Service\bin\Debug\PagedList.Mvc.dll
+C:\Users\vidak\source\repos\Project\Project.Service\bin\Debug\X.PagedList.dll
+C:\Users\vidak\source\repos\Project\Project.Service\bin\Debug\EntityFramework.xml
+C:\Users\vidak\source\repos\Project\Project.Service\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\vidak\source\repos\Project\Project.Service\bin\Debug\PagedList.xml
+C:\Users\vidak\source\repos\Project\Project.Service\bin\Debug\PagedList.Mvc.xml
+C:\Users\vidak\source\repos\Project\Project.Service\obj\Debug\Project.Service.csproj.CoreCompileInputs.cache
+C:\Users\vidak\source\repos\Project\Project.Service\obj\Debug\Project.Service.csproj.CopyComplete
+C:\Users\vidak\source\repos\Project\Project.Service\obj\Debug\Project.Service.dll
+C:\Users\vidak\source\repos\Project\Project.Service\obj\Debug\Project.Service.pdb
