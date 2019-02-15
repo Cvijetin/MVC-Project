@@ -38,7 +38,7 @@ namespace Project.MVC.Controllers
                 if (ModelState.IsValid)
                 {
                     vehicleMakeService.CreateNewVehicleMake(createItemModel);
-                    return Ok();
+                    return Ok("Data saved");
                 }
                 else
                 {
