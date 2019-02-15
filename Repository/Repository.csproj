@@ -51,6 +51,7 @@
     <Compile Include="BaseData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VehicleMakeData.cs" />
+    <Compile Include="VehicleModelData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
