@@ -10,7 +10,7 @@ namespace Project.MVC.Controllers
     {
         public ActionResult Index()
         {
-            return RedirectToAction("Index", "VehicleMake");
+            return View();
         }
 
         public ActionResult About()
