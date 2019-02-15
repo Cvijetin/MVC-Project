@@ -13,7 +13,7 @@ namespace Services.Mapper
     {
         public MappingProfile()
         {
-            CreateMap<VehicleMake, VehicleMakeDTO>();
+            CreateMap<VehicleMakeDTO, VehicleMake>();
         }
         
     }

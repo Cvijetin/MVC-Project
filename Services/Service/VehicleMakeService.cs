@@ -1,4 +1,5 @@
-﻿using Model.DTO;
+﻿using DAL;
+using Model.DTO;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,12 @@ namespace Services.Service
         public List<VehicleMakeDTO> GetVehicleMakeInfo()
         {
             return mapper.Map<List<VehicleMakeDTO>>(vehicleMakeData.GetVehicles()); 
+        }
+
+        public void CreateNewVehicleMake(VehicleMakeDTO createVehicleMakeData)
+        {
+            var newVehicleMake = mapper.Map<VehicleMakeDTO, VehicleMake>(createVehicleMakeData);
+            vehicleMakeData.AddNewVehicleMake(newVehicleMake);
         }
     }
 }

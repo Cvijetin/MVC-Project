@@ -1,4 +1,5 @@
-﻿using Services.Service;
+﻿using Model.DTO;
+using Services.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,30 @@ namespace Project.MVC.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [Route("vehicleMakeItem")]
+        [HttpPost]
+        public IHttpActionResult AddNewVehicleMake(VehicleMakeDTO createItemModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    vehicleMakeService.CreateNewVehicleMake(createItemModel);
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest(ModelState);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+
         }
     }
 }
