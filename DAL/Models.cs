@@ -122,6 +122,8 @@ namespace DAL
             modelBuilder.Configurations.Add(new VehicleModelConfiguration(schema));
             return modelBuilder;
         }
+
+        public System.Data.Entity.DbSet<Model.DTO.VehicleMakeDTO> VehicleMakeDTOes { get; set; }
     }
     #endregion
 

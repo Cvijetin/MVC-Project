@@ -1,56 +1,165 @@
 ﻿using Model.DTO;
-using Services.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Data;
 using System.Web;
-using System.Web.Http;
+using System.Web.Mvc;
+using System.Web.UI;
+using Services;
+using Repository.Helpers;
+using System.Threading.Tasks;
 
 namespace Project.MVC.Controllers
 {
-    [RoutePrefix("api/vehicleMakes")]
-    public class VehicleMakeController : ApiController
+    public class VehicleMakeController : Controller
     {
-        private VehicleMakeService vehicleMakeService = new VehicleMakeService();
-        // GET: VehicleMake
-        [Route("")]
-        [HttpGet]
-        public IHttpActionResult GetStocktakings()
+        private IVehicleMakeService _vehicleMakeService;
+        private IArrange _arrange;
+
+        public VehicleMakeController(IVehicleMakeService vehicleMakeService, IArrange arrange)
         {
-            try
-            {
-                var result = vehicleMakeService.GetVehicleMakeInfo();
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            _vehicleMakeService = vehicleMakeService;
+            _arrange = arrange;
         }
 
-        [Route("vehicleMakeItem")]
-        [HttpPost]
-        public IHttpActionResult AddNewVehicleMake(VehicleMakeDTO createItemModel)
+        public async Task<ActionResult> Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
             try
             {
-                if (ModelState.IsValid)
+                ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                ViewBag.AbrvParm = sortOrder == "Abrv" ? "abrv_desc" : "Abrv";
+                ViewBag.CurrentSort = sortOrder;
+
+                if (searchString != null)
                 {
-                    vehicleMakeService.CreateNewVehicleMake(createItemModel);
-                    return Ok("Data saved");
+                    page = 1;
                 }
                 else
                 {
-                    return BadRequest(ModelState);
+                    searchString = currentFilter;
+                }
+
+                ViewBag.CurrentFilter = searchString;
+
+                _arrange.PageSize = 4;
+                _arrange.Page = page;
+                _arrange.SearchString = searchString;
+                _arrange.SortOrder = sortOrder;
+
+                var pagedList = await _vehicleMakeService.GetPagedListAsync(_arrange);
+
+                return View(pagedList);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<ActionResult> Details(int id)
+        {
+            try
+            {
+                var vehicleMake = await _vehicleMakeService.GetByIdAsync(id);
+                if (vehicleMake == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(vehicleMake);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [System.Web.Mvc.HttpPost]
+        public async Task<ActionResult> Create(VehicleMakeDTO collection)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _vehicleMakeService.InsertAsync(collection);
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception e)
+                {
+                    return Content(e.Message.ToString());
                 }
             }
-            catch (Exception ex)
+            else
             {
-
-                return BadRequest(ex.Message);
+                return View();
             }
+        }
 
+        public async Task<ActionResult> Edit(int id)
+        {
+            try
+            {
+                var vehicleMake = await _vehicleMakeService.GetByIdAsync(id);
+                if (vehicleMake == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(vehicleMake);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(int id, VehicleMakeDTO collection)
+        {
+            try
+            {
+                await _vehicleMakeService.Update(collection);
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public async Task<ActionResult> Delete(int id)
+        {
+            try
+            {
+                var vehicleMake = await _vehicleMakeService.GetByIdAsync(id);
+                return View(vehicleMake);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Delete(int id, VehicleMakeDTO collection)
+        {
+            try
+            {
+                await _vehicleMakeService.DeleteAsync(id);
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }
